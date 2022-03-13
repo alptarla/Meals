@@ -2,6 +2,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import React from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import { useSelector } from "react-redux";
+import DefaultText from "../components/DefaultText";
 import MealItem from "../components/MealItem";
 import { selectCategoryMeals } from "../store/meal-slice";
 
@@ -18,6 +19,14 @@ export default function MealsScreen() {
     <MealItem meal={item} onSelectItem={selectMealHandler} />
   );
 
+  if (!meals.length) {
+    return (
+      <View style={styles.messageScreen}>
+        <DefaultText>No meals found, maybe check your filters?</DefaultText>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.screen}>
       <FlatList data={meals} renderItem={renderMealItem} />
@@ -30,5 +39,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white",
     padding: 15,
+  },
+  messageScreen: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
