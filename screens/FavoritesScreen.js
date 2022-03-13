@@ -2,6 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import { useSelector } from "react-redux";
+import DefaultText from "../components/DefaultText";
 import MealItem from "../components/MealItem";
 
 export default function FavoritesScreen() {
@@ -16,6 +17,14 @@ export default function FavoritesScreen() {
     <MealItem meal={item} onSelectItem={selectMealHandler} />
   );
 
+  if (!favoriteMeals.length) {
+    return (
+      <View style={styles.messageScreen}>
+        <DefaultText>No meals found!</DefaultText>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.screen}>
       <FlatList data={favoriteMeals} renderItem={renderMealItem} />
@@ -28,5 +37,10 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 15,
     backgroundColor: "white",
+  },
+  messageScreen: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

@@ -22,7 +22,7 @@ export default function MealsScreen() {
   if (!meals.length) {
     return (
       <View style={styles.messageScreen}>
-        <DefaultText>No meals found, maybe check your filters?</DefaultText>
+        <DefaultText>No meals found!</DefaultText>
       </View>
     );
   }
