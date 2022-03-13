@@ -1,31 +1,34 @@
-import { useNavigation } from '@react-navigation/native'
-import React from 'react'
-import { Button, StyleSheet, Text, View } from 'react-native'
-import { useSelector } from 'react-redux'
+import { useNavigation } from "@react-navigation/native";
+import React from "react";
+import { FlatList, StyleSheet, View } from "react-native";
+import { useSelector } from "react-redux";
+import CategoryItem from "../components/CategoryItem";
 
 export default function CategoriesScreen() {
-  const {categories} = useSelector(state => state.category)
+  const { categories } = useSelector((state) => state.category);
+  const navigation = useNavigation();
 
-  const navigation = useNavigation()
+  const selectCategoryHandler = (catId) => {
+    navigation.navigate("Meals", { categoryId: catId });
+  };
 
-  const goToMealsScreen = () => {
-    navigation.navigate('Meals')
-  }
-
-  console.log('categories', categories)
+  const renderCategoryItems = ({ item }) => (
+    <CategoryItem onSelectItem={selectCategoryHandler} category={item} />
+  );
 
   return (
     <View style={styles.screen}>
-      <Text>Categories</Text>
-      <Button title='Meals' onPress={goToMealsScreen} />
+      <FlatList
+        data={categories}
+        renderItem={renderCategoryItems}
+        numColumns={2}
+      />
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
-})
+  },
+});

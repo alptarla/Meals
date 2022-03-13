@@ -1,26 +1,23 @@
-import { useNavigation } from '@react-navigation/native'
-import React from 'react'
-import { Button, StyleSheet, Text, View } from 'react-native'
+import { useRoute } from "@react-navigation/native";
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
 
 export default function MealsScreen() {
-  const navigation = useNavigation()
+  const route = useRoute();
 
-  const goToCategoriesScreen = () => {
-    navigation.navigate('Categories')
-  }
+  console.log("selected", route.params.categoryId);
 
   return (
     <View style={styles.screen}>
       <Text>Meals</Text>
-      <Button title='Categories' onPress={goToCategoriesScreen} />
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
-})
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
