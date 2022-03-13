@@ -30,8 +30,6 @@ export default function MealDetailScreen() {
     dispatch(toggleFavoriteMeal(meal));
   };
 
-  console.log("favoriteMeals", favoriteMeals);
-
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: ({ tintColor }) => {
