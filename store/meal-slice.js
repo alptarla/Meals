@@ -5,6 +5,20 @@ const mealSlice = createSlice({
   name: "meals",
   initialState: {
     meals: Meals,
+    favoriteMeals: [],
+  },
+  reducers: {
+    toggleFavoriteMeal(state, { payload }) {
+      const { favoriteMeals } = state;
+      if (favoriteMeals.some((fav) => fav.id === payload.id)) {
+        state.favoriteMeals = favoriteMeals.filter(
+          (fav) => fav.id !== payload.id
+        );
+        return;
+      }
+
+      state.favoriteMeals.push(payload);
+    },
   },
 });
 
@@ -20,5 +34,6 @@ function selectMeal(id) {
   };
 }
 
-export default mealSlice.reducer;
 export { selectCategoryMeals, selectMeal };
+export const { toggleFavoriteMeal } = mealSlice.actions;
+export default mealSlice.reducer;

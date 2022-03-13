@@ -1,14 +1,52 @@
-import { useRoute } from "@react-navigation/native";
-import React from "react";
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
-import { useSelector } from "react-redux";
+import { Ionicons } from "@expo/vector-icons";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import React, { useLayoutEffect } from "react";
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 import DefaultText from "../components/DefaultText";
 import ListItem from "../components/ListItem";
-import { selectMeal } from "../store/meal-slice";
+import { selectMeal, toggleFavoriteMeal } from "../store/meal-slice";
 
 export default function MealDetailScreen() {
+  const navigation = useNavigation();
   const route = useRoute();
+  const dispatch = useDispatch();
+
   const meal = useSelector(selectMeal(route.params.mealId));
+  const { favoriteMeals } = useSelector((state) => state.meal);
+
+  const isFavorite = favoriteMeals.some((fav) => {
+    return fav.id === route.params.mealId;
+  });
+
+  const toggleFavoriteHandler = () => {
+    dispatch(toggleFavoriteMeal(meal));
+  };
+
+  console.log("favoriteMeals", favoriteMeals);
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: ({ tintColor }) => {
+        return (
+          <TouchableOpacity onPress={toggleFavoriteHandler}>
+            <Ionicons
+              name={isFavorite ? "star" : "star-outline"}
+              color={tintColor}
+              size={24}
+            />
+          </TouchableOpacity>
+        );
+      },
+    });
+  }, [navigation, isFavorite]);
 
   return (
     <ScrollView style={styles.screen}>
