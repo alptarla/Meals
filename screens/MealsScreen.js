@@ -1,4 +1,4 @@
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import React from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import { useSelector } from "react-redux";
@@ -6,11 +6,12 @@ import MealItem from "../components/MealItem";
 import { selectCategoryMeals } from "../store/meal-slice";
 
 export default function MealsScreen() {
+  const navigation = useNavigation();
   const route = useRoute();
   const meals = useSelector(selectCategoryMeals(route.params.categoryId));
 
   const selectMealHandler = (mealId) => {
-    console.log("mealId", mealId);
+    navigation.navigate("MealDetail", { mealId });
   };
 
   const renderMealItem = ({ item }) => (

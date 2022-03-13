@@ -5,6 +5,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { Provider } from "react-redux";
 import CategoriesScreen from "./screens/CategoriesScreen";
+import MealDetailScreen from "./screens/MealDetailScreen";
 import MealsScreen from "./screens/MealsScreen";
 import store from "./store";
 
@@ -24,6 +25,7 @@ export default function App() {
         <Stack.Navigator>
           <Stack.Screen name="Categories" component={CategoriesScreen} />
           <Stack.Screen name="Meals" component={MealsScreen} />
+          <Stack.Screen name="MealDetail" component={MealDetailScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

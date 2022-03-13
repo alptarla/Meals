@@ -14,5 +14,11 @@ function selectCategoryMeals(catId) {
   };
 }
 
+function selectMeal(id) {
+  return ({ meal }) => {
+    return meal.meals.find((m) => m.id === id);
+  };
+}
+
 export default mealSlice.reducer;
-export { selectCategoryMeals };
+export { selectCategoryMeals, selectMeal };
