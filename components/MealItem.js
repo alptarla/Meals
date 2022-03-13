@@ -6,6 +6,7 @@ import {
   Text,
   View,
 } from "react-native";
+import DefaultText from "./DefaultText";
 
 export default function MealItem({ meal, onSelectItem }) {
   const selectItemHandler = () => {
@@ -26,9 +27,9 @@ export default function MealItem({ meal, onSelectItem }) {
           </View>
         </ImageBackground>
         <View style={styles.mealDetails}>
-          <Text>{`${meal.duration}m`}</Text>
-          <Text>{meal.complexity.toUpperCase()}</Text>
-          <Text>{meal.affordability.toUpperCase()}</Text>
+          <DefaultText>{`${meal.duration}m`}</DefaultText>
+          <DefaultText>{meal.complexity.toUpperCase()}</DefaultText>
+          <DefaultText>{meal.affordability.toUpperCase()}</DefaultText>
         </View>
       </View>
     </Pressable>
@@ -58,6 +59,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 20,
     textAlign: "center",
+    fontFamily: "open-sans-bold",
   },
   mealDetails: {
     flexDirection: "row",
