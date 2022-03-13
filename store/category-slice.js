@@ -2,10 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 import { Categories } from "../dummy-data";
 
 const categorySlice = createSlice({
-  name: 'category',
+  name: "category",
   initialState: {
-    categories: Categories
-  }
-})
+    categories: Categories,
+    selectedCategory: null,
+  },
+});
 
-export default categorySlice.reducer
+export default categorySlice.reducer;
