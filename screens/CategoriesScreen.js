@@ -9,7 +9,10 @@ export default function CategoriesScreen() {
   const navigation = useNavigation();
 
   const selectCategoryHandler = (catId) => {
-    navigation.navigate("Meals", { categoryId: catId });
+    navigation.navigate("Meals", {
+      screen: "All",
+      params: { categoryId: catId },
+    });
   };
 
   const renderCategoryItems = ({ item }) => (
