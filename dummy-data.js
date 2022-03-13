@@ -200,3 +200,7 @@ const Meals = [
   }
 ]
 
+export {
+  Categories,
+  Meals
+}
